@@ -1,13 +1,19 @@
 import React, { memo } from 'react';
-import { HashRouter } from 'react-router-dom';
 import './App.css';
-import Login from './Login'
+import Login from '@pages/Login'
+import Collect from '@pages/Collect'
+import { HashRouter,Route,Switch,Redirect } from 'react-router-dom'
 
 export default memo(function App() {
   return (
-
     <HashRouter>
-        <Login />
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/collect" component={Collect} />
+          <Route path="/" >
+            <Redirect to='/login'></Redirect>
+          </Route>
+        </Switch>
     </HashRouter>
   );
 });
