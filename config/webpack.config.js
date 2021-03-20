@@ -342,6 +342,7 @@ module.exports = function (webpackEnv) {
         ...(modules.webpackAliases || {}),
         '@': path.resolve(__dirname, '../src'),
         '@components': path.resolve(__dirname, '../src/components'),
+        '@router': path.resolve(__dirname, '../src/router'),
         '@pages': path.resolve(__dirname, '../src/pages'),
         '@assets': path.resolve(__dirname, '../src/assets')
       },

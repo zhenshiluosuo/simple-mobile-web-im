@@ -1,6 +1,5 @@
 
 import React, { memo, useState } from 'react';
-import '@assets/Login.jpg'
 import styles from './index.less'
 import {Button, Input, message} from 'antd'
 import md5 from "md5";
