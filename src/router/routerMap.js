@@ -1,10 +1,13 @@
-import Collections from "@pages/collections";
+import MainView from '@pages/mainView'
 import ErrorPage from "@pages/error";
 import Login from "@pages/login";
 const routerMap = [
-  { path: "/collections", name: "Collections", component: Collections, auth: true },
+  { path: "/mainView", name: "MainView", component: MainView, auth: true },
+  { path: "/mainView/collections", name: "Collections",  auth: true },
+  { path: "/mainView/friends", name: "Friends", auth: true },
+  { path: "/mainView/groups", name: "Collections", auth: true },
+  { path: "/mainView/home", name: "Friends", auth: true },
   { path: "/login", name: "Login", component: Login },
-  { path: "/", name: "Collections", component: Collections, auth: true },
   { path: "/404", name: "404", component: ErrorPage },
 ]
 export default routerMap

@@ -8,7 +8,9 @@ export default class index extends Component {
 
     render() {
         return (
-            <div></div>
+            <div>
+                这是home
+            </div>
         )
     }
 }

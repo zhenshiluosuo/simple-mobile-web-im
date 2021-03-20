@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Collect = (props) => {
-    return <div></div>
+const Collections = (props) => {
+    return <div>1234</div>
 }
-export default Collect
+export default Collections
