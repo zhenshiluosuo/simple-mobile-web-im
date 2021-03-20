@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState,useMemo} from 'react';
 import { NavLink,Redirect,Route,Switch } from 'react-router-dom'
 import Collections from '@pages/collections';
 import Friends from '@pages/friends';
@@ -7,12 +7,17 @@ import Groups from '@pages/groups';
 import styles from './index.less'
 import { Menu,Divider } from 'antd';
 import {PlusCircleOutlined} from '@ant-design/icons';
+import axios from "axios";
 
+axios.defaults.withCredentials = true;
 const MainView = (props) => {
     const [current, setcurrent] = useState('会话')
     const handleClick = (e) => {
         setcurrent(e.key)
     }
+    useMemo( async () => {
+        return axios.get('/api/q=sh600027').then((data) => console.log(data))
+    }, [])
     return (
         <div className={styles.all}>
             {current !== '我'&&<div className={styles.header}>
