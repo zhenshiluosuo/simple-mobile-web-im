@@ -16,7 +16,7 @@ const MainView = (props) => {
     return (
         <div className={styles.all}>
             {current !== '我'&&<div className={styles.header}>
-            <span>{current}</span>
+            {current}
             <PlusCircleOutlined className={styles.icon}/>
             </div>
             }
