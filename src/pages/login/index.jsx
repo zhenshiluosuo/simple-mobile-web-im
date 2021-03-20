@@ -1,4 +1,3 @@
-
 import React, { memo, useState } from 'react';
 import styles from './index.less'
 import {Button, Input, message} from 'antd'
@@ -22,9 +21,9 @@ export default memo(function APPWrapper(props) {
         }
         else{
           message.error('This is an error message');
-          setloading(false)  
+          setloading(false)
         }
-        
+
       },3000)
     }
     return (
@@ -42,4 +41,3 @@ export default memo(function APPWrapper(props) {
         </h5>
       </div>)
   });
-  
