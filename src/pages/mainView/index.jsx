@@ -1,4 +1,4 @@
-import React , {useState,useMemo} from 'react';
+import React , {useState} from 'react';
 import { NavLink,Redirect,Route,Switch } from 'react-router-dom'
 import Collections from '@pages/collections';
 import Friends from '@pages/friends';
@@ -15,9 +15,7 @@ const MainView = (props) => {
     const handleClick = (e) => {
         setcurrent(e.key)
     }
-    useMemo( async () => {
-        return axios.get('/api/q=sh600027').then((data) => console.log(data))
-    }, [])
+
     return (
         <div className={styles.all}>
             {current !== '我'&&<div className={styles.header}>
