@@ -1,14 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
+import styles from './index.less';
 
-export default class index extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+const Friend = (props) => {
+    const { name , imgSrc} = props
 
-    render() {
-        return (
-            <div></div>
-        )
-    }
+    return <div className={styles.friendWrapper} >
+        <div className={styles.imgWrapper}>
+            <img src={imgSrc} alt=""/>
+        </div>
+        <span className={styles.name}>{name}</span>
+    </div>
 }
+export default Friend

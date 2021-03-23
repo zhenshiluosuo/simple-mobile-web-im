@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
+import React from 'react';
+import Friend from '@components/friendItem'
 
-export default class index extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
-        return (
-            <div>
-                这是好友
-            </div>
-        )
-    }
+export default (props) => {
+    const friendInfo = [{
+        imgSrc : '../../assets/Login.jpg',
+        name : 'jack'
+    },{
+        imgSrc : '../../assets/Login.jpg',
+        name : 'mary'
+    }]
+    return (
+        friendInfo.map((item) => {
+            return <Friend {...item}></Friend>
+        })
+    )
 }

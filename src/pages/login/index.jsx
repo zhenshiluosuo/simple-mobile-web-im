@@ -26,6 +26,11 @@ export default memo(function APPWrapper(props) {
 
       },3000)
     }
+    const onKeyup = (e) => {
+      if( e.keyCode === 13 && username && password ) {
+        login()
+      }
+    }
     return (
       <div className={styles.background}>
         <h1 className={styles.title}>
@@ -33,7 +38,7 @@ export default memo(function APPWrapper(props) {
         </h1>
         <div className={styles.inputWrapper}>
           <Input placeholder='邮箱/手机号' allowClear className={styles.input} onChange={usernameChange} value={username}/>
-          <Input.Password placeholder="登录密码" allowClear className={styles.input} onChange={passwordChange} value={password} />
+          <Input.Password placeholder="登录密码" allowClear className={styles.input} onChange={passwordChange} value={password} onKeyUp={onKeyup}/>
           <Button type="primary" loading={loading} className={styles.button} onClick={login}>登录</Button>
         </div>
         <h5 className={styles.footer}>
