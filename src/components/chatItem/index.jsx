@@ -1,9 +1,16 @@
 import React,{useEffect} from 'react';
-import {observer,inject} from 'mobx-react'
-const Chat = (props) => {
-    const { chatStore} = props
-    return <div>
+import store from '@/store'
 
+const Chat = (props) => {
+
+    useEffect(() => {
+        store.changeFooter(false)
+        return () => {
+            store.changeFooter(true)
+        }
+    }, [])
+    return <div>
+123
     </div>
 }
-export default inject('chatStore')(observer(Chat))
+export default Chat

@@ -2,9 +2,9 @@ import React,{useState} from 'react';
 import Friend from '@components/friendItem'
 import FriendDesc from '@components/friendItem/friendDsec'
 import styles from './index.less';
-import {observer,inject} from 'mobx-react'
+import store from '@/store'
 
-export default inject('chatStore')(observer((props) => {
+export default (props) => {
 
     const friendInfo = [{
         imgSrc : '../../assets/profile/1.jpg',
@@ -13,18 +13,17 @@ export default inject('chatStore')(observer((props) => {
         imgSrc : '../../assets/profile/1.jpg',
         name : 'mary'
     }]
-    const [flag, setflag] = useState(true)
     const [desc, setdesc] = useState(null)
     const handleClick = (item) => {
-        setflag(false)
+        store.changefriendDesc(true)
         setdesc(item)
     }
     return (
-        flag?
+        store.friendDesc?<FriendDesc {...desc}></FriendDesc>:
         <div className={styles['friend-list']}>{friendInfo.map((item) => {
             return <div onClick={() => handleClick(item)}><Friend {...item} ></Friend></div> 
-        })}</div>: 
-        <FriendDesc {...desc}></FriendDesc>
+        })}</div>
+        
     )
     
-}))
+}

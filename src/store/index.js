@@ -1,18 +1,17 @@
 import {observable,action} from 'mobx'
-class ChatStore{
-    @observable chatFlag = false;
-    @observable selectedKey = '会话';
+let store = observable({
+    chatFlag:false,
+    changeChatFlag:action(function(newVal){
+            this.chatFlag = newVal
+    }),
+    footer:true,
+    changeFooter:action(function(newVal){
+        this.footer = newVal
+    }),
+    friendDesc:false,
+    changefriendDesc:action(function(newVal){
+        this.friendDesc = newVal
+    })
+})
 
-    @action changeChatFlag(value){
-        this.chatFlag = value
-    }
-    @action changeselectedKey(value){
-        this.chatselectedKey = value
-    }
-
-}
-let chatStore = new ChatStore()
-const stores = {
-    chatStore
-}
-export default stores
+export default store

@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import { NavLink,Redirect,Route,Switch } from 'react-router-dom'
 import Collections from '@pages/collections';
 import Friends from '@pages/friends';
@@ -6,25 +6,33 @@ import Home from '@pages/home';
 import Groups from '@pages/groups';
 import styles from './index.less'
 import { Menu,Divider } from 'antd';
-import {PlusCircleOutlined} from '@ant-design/icons';
+import {PlusCircleOutlined,LeftOutlined} from '@ant-design/icons';
 import axios from "axios";
-import {observer,inject} from 'mobx-react'
+import store from '@/store'
+import {observer} from 'mobx-react'
 
 axios.defaults.withCredentials = true;
 const MainView = (props) => {
-    console.log(props);
-    const {chatStore,location:{pathname}} = props
+    const {location:{pathname}} = props
     const [current, setcurrent] = useState(pathname.split('/')[2] || 'collections')
-    console.log(current);
     const handleClick = (e) => {
         setcurrent(e.key)
-        chatStore.changeChatFlag(false)
+    }
+    useEffect(() => {
+        setcurrent(pathname.split('/')[2] || 'collections')
+    }, [pathname])
+    const handleBack = () => {
+        store.changefriendDesc(false)
+        store.changeChatFlag(false)
+        store.changeFooter(true)
     }
     return (
+
         <div className={styles.all}>
             {current !== 'home'&&<div className={styles.header}>
+            <LeftOutlined className={styles.backicon} onClick={handleBack}/>
             {current}
-            <PlusCircleOutlined className={styles.icon}/>
+            <PlusCircleOutlined className={styles.menuicon}/>
             </div>
             }
             <div className={styles.content}>
@@ -37,7 +45,7 @@ const MainView = (props) => {
                     <Redirect to='/mainView/collections'/>
                 </Switch>
             </div>
-            <div className={styles.footer}>
+            {store.footer&&<div className={styles.footer}>
                 <Divider className={styles.divider}/>
                 <Menu mode="horizontal" onClick={handleClick} selectedKeys={current} className={styles.menu} >
                     <Menu.Item key="collections" className={styles.item} >
@@ -53,9 +61,9 @@ const MainView = (props) => {
                     <NavLink to='/mainView/home'>我</NavLink>
                 </Menu.Item>
                 </Menu>
-            </div>
+            </div>}
         </div>
     )
 }
 
-export default inject('chatStore')(observer(MainView))
+export default observer(MainView)
