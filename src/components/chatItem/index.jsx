@@ -1,14 +1,9 @@
-import React, {Component} from 'react';
+import React,{useEffect} from 'react';
+import {observer,inject} from 'mobx-react'
+const Chat = (props) => {
+    const { chatStore} = props
+    return <div>
 
-export default class index extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
-
-    render() {
-        return (
-            <div></div>
-        )
-    }
+    </div>
 }
+export default inject('chatStore')(observer(Chat))

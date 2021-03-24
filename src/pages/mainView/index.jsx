@@ -8,17 +8,21 @@ import styles from './index.less'
 import { Menu,Divider } from 'antd';
 import {PlusCircleOutlined} from '@ant-design/icons';
 import axios from "axios";
+import {observer,inject} from 'mobx-react'
 
 axios.defaults.withCredentials = true;
 const MainView = (props) => {
-    const [current, setcurrent] = useState('会话')
+    console.log(props);
+    const {chatStore,location:{pathname}} = props
+    const [current, setcurrent] = useState(pathname.split('/')[2] || 'collections')
+    console.log(current);
     const handleClick = (e) => {
         setcurrent(e.key)
+        chatStore.changeChatFlag(false)
     }
-
     return (
         <div className={styles.all}>
-            {current !== '我'&&<div className={styles.header}>
+            {current !== 'home'&&<div className={styles.header}>
             {current}
             <PlusCircleOutlined className={styles.icon}/>
             </div>
@@ -35,17 +39,17 @@ const MainView = (props) => {
             </div>
             <div className={styles.footer}>
                 <Divider className={styles.divider}/>
-                <Menu mode="horizontal" onClick={handleClick} selectedKeys={current} className={styles.menu}>
-                    <Menu.Item key="会话" className={styles.item}>
+                <Menu mode="horizontal" onClick={handleClick} selectedKeys={current} className={styles.menu} >
+                    <Menu.Item key="collections" className={styles.item} >
                 <NavLink to='/mainView/collections'>会话</NavLink>
                 </Menu.Item>
-                <Menu.Item key="好友" className={styles.item}>
+                <Menu.Item key="friends" className={styles.item}>
                     <NavLink to='/mainView/friends'>好友</NavLink>
                 </Menu.Item>
-                <Menu.Item key="群组" className={styles.item}>
+                <Menu.Item key="groups" className={styles.item} >
                     <NavLink to='/mainView/groups'>群组</NavLink>
                 </Menu.Item>
-                <Menu.Item key="我" className={styles.item}>
+                <Menu.Item key="home" className={styles.item}>
                     <NavLink to='/mainView/home'>我</NavLink>
                 </Menu.Item>
                 </Menu>
@@ -54,4 +58,4 @@ const MainView = (props) => {
     )
 }
 
-export default MainView
+export default inject('chatStore')(observer(MainView))

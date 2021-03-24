@@ -1,7 +1,9 @@
-import React, {memo} from 'react';
+import React from 'react';
 import styles from './index.less'
 import SessionItem from '../../components/sessionItem'
-export default memo(function APP() {
+import {observer,inject} from 'mobx-react'
+import Chat from '@components/chatItem'
+export default inject('chatStore')(observer(function APP(props) {
     const tempInfos = [
         {
             id: 0,
@@ -193,12 +195,12 @@ export default memo(function APP() {
             unreadNum: 3
         }
     ];
-
+    const { chatStore} = props
     React.useEffect(() => {
 
     })
-
     return (
+        !chatStore.chatFlag ?
         <div className={styles.collections}>
             {
                 tempInfos.map((item, index) => {
@@ -208,5 +210,7 @@ export default memo(function APP() {
                 })
             }
 
-        </div>)
-});
+        </div>:
+        <Chat />
+        )
+}));
