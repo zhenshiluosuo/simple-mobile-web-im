@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './index.less'
 import SessionItem from '../../components/sessionItem'
 
 import store from '@/store'
 import Chat from '@components/chatItem'
-export default function APP(props) {
+import {observer} from 'mobx-react'
+export default observer(function APP(props) {
     const tempInfos = [
         {
             id: 0,
@@ -196,21 +197,31 @@ export default function APP(props) {
             unreadNum: 3
         }
     ];
+    
+    const handleChatInit = () => {
+        //这里拿调用后端api来初始化
+        //const res = await api.xxxx
+        //setchatData(res)
+        store.changeInitChatData({a:1});
+        store.changeChatFlag(true)
+    }
     React.useEffect(() => {
 
     })
-    return (
-        !store.chatFlag ?
+    return <>
+        {!store.chatFlag ?
         <div className={styles.collections}>
             {
                 tempInfos.map((item, index) => {
                     return (
-                        <SessionItem key={index} item={item} />
+                        <div onClick={handleChatInit}>
+                            <SessionItem key={index} item={item} />
+                        </div> 
                     )
                 })
             }
 
         </div>:
-        <Chat />
-        )
-}
+        <Chat data={store.initChatData}/>}
+    </>
+})

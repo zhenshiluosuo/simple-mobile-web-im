@@ -11,6 +11,11 @@ const FriendDesc = (props) => {
             store.changeFooter(true)
         }
     }, [])
+    const handleClick = () => {
+        //let res = await api.xxx
+        store.changeInitChatData({b:1});
+        store.changeChatFlag(true)
+    }
     return <div className={styles.wrapper}>
         <div className={styles.descwrapper}>
             <div className={styles.imgwrapper}>
@@ -22,7 +27,7 @@ const FriendDesc = (props) => {
                 <span>地区:xxx</span>
             </div>
         </div>
-        <NavLink to='/mainView/collections'><div className={styles.talk} onClick={() => store.changeChatFlag(true)}>发消息</div></NavLink>
+        <NavLink to='/mainView/collections'><div className={styles.talk} onClick={handleClick}>发消息</div></NavLink>
     </div>
 }
 export default FriendDesc
